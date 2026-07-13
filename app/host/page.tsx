@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 export default function HostPage() {
   const router = useRouter();
   
-  // CREATE: Form State
+  // create Form State
   const [formData, setFormData] = useState({
     title: '',
     game: 'Valorant',
@@ -17,7 +17,7 @@ export default function HostPage() {
     e.preventDefault();
     console.log("Saving to Database:", formData);
     alert("Tournament Created as Draft!");
-    router.push('/'); // Go back to discovery
+    router.push('/'); //back to discovery
   };
 
   return (
