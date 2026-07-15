@@ -18,9 +18,11 @@ export default async function ArenaPage() {
 
   const { data: { user } } = await supabase.auth.getUser()
   const userAlias = user?.user_metadata?.username || user?.email?.split('@')[0]
-  const isAdmin = user !== null && user?.app_metadata?.role === 'admin'
+  
+  // If the user object exists, they are logged in and allowed to create tournaments!
+  const canCreateTournament = user !== null
 
-  //fetch tournament  
+  // Fetch the tournament list specifically for the Arena page
   const { data: tournaments, error } = await supabase
     .from('tournaments')
     .select('id, title, game, date, prize_pool, status')
@@ -39,14 +41,14 @@ export default async function ArenaPage() {
 
       <div className="max-w-6xl mx-auto space-y-12 relative z-10">
         
-        {/* Navigator */}
+         {/* Navigator */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pb-6 border-b border-white/5">
           {/* Brand Logo */}
           <Link href="/" className="text-xl font-light tracking-[0.3em] uppercase group">
             Victors<span className="font-medium group-hover:brightness-125 transition" style={{ color: '#4a0006' }}>Only</span>
           </Link>
           
-          {/* navigation */}
+           {/* navigation */}
           <div className="flex items-center space-x-8 text-xs tracking-[0.2em] uppercase font-light text-zinc-400">
             <Link href="/" className="hover:text-white border-b border-transparent hover:border-[#4a0006] pb-1 transition-all duration-200">
               Home
@@ -66,11 +68,6 @@ export default async function ArenaPage() {
           <div className="flex items-center space-x-6 text-xs tracking-widest uppercase">
             {user ? (
               <div className="flex items-center space-x-4">
-                {isAdmin && (
-                  <span className="px-3 py-1 rounded-full border border-[#4a0006] text-[#4a0006] text-[10px] font-bold tracking-widest uppercase bg-[#4a0006]/10">
-                    Admin Mode
-                  </span>
-                )}
                 <span className="text-zinc-500 font-light lowercase">@{userAlias}</span>
                 <form action={logout}>
                   <button type="submit" className="px-5 py-2 rounded-full border border-[#4a0006]/40 hover:bg-[#4a0006]/20 transition text-zinc-300 hover:text-white">
@@ -99,9 +96,9 @@ export default async function ArenaPage() {
 
           {/* create button*/}
           <div>
-            {isAdmin ? (
+            {canCreateTournament ? (
               <a 
-                href="#admin-deploy-panel" 
+                href="#deploy-panel" 
                 className="inline-block px-5 py-2.5 rounded-xl font-semibold text-xs uppercase tracking-wider text-white transition-all hover:brightness-125 bg-zinc-900 border border-zinc-800 hover:border-[#4a0006]"
               >
                 + Deploy Bracket
@@ -118,9 +115,9 @@ export default async function ArenaPage() {
           </div>
         </div>
 
-        {/* admin creation */}
-        {isAdmin && (
-          <div id="admin-deploy-panel" className="p-8 rounded-2xl border border-[#4a0006]/30 bg-gradient-to-r from-zinc-950 to-black max-w-4xl mr-auto scroll-mt-6">
+         {/* creation */}
+        {canCreateTournament && (
+          <div id="deploy-panel" className="p-8 rounded-2xl border border-[#4a0006]/30 bg-gradient-to-r from-zinc-950 to-black max-w-4xl mr-auto scroll-mt-6">
             <h3 className="text-sm font-semibold tracking-widest uppercase text-zinc-300 mb-6 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#4a0006] animate-ping" />
               Deploy New Tournament Arena
