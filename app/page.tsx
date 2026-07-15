@@ -1,6 +1,6 @@
 import { createServerSideClient } from '@/lib/supabase-server'
 import Link from 'next/link'
-import { logout, createTournament } from './auth/action' 
+import { logout, createTournament } from './auth/actions' // Import the creation action here
 
 export const dynamic = 'force-dynamic'
 
@@ -36,14 +36,31 @@ export default async function HomePage() {
 
       <div className="max-w-6xl mx-auto space-y-12 relative z-10">
         
-        {/* Navbar */}
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-light tracking-[0.3em] uppercase">
-            Victors<span className="font-medium" style={{ color: '#4a0006' }}>Only</span>
-          </h1>
+        {/* Modern Top Navigator */}
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pb-6 border-b border-white/5">
+          {/* Brand Logo */}
+          <Link href="/" className="text-xl font-light tracking-[0.3em] uppercase group">
+            Victors<span className="font-medium group-hover:brightness-125 transition" style={{ color: '#4a0006' }}>Only</span>
+          </Link>
+          
+          {/* Main Navigation Links */}
+          <div className="flex items-center space-x-8 text-xs tracking-[0.2em] uppercase font-light text-zinc-400">
+            <Link href="/" className="hover:text-white border-b border-transparent hover:border-[#4a0006] pb-1 transition-all duration-200 text-white">
+              Home
+            </Link>
+            <a href="#arenas" className="hover:text-white border-b border-transparent hover:border-[#4a0006] pb-1 transition-all duration-200">
+              Arena
+            </a>
+            <Link href="/news" className="hover:text-white border-b border-transparent hover:border-[#4a0006] pb-1 transition-all duration-200">
+              News
+            </Link>
+            <Link href="/contact" className="hover:text-white border-b border-transparent hover:border-[#4a0006] pb-1 transition-all duration-200">
+              Contact Us
+            </Link>
+          </div>
+
+          {/* User Auth Portal */}
           <div className="flex items-center space-x-6 text-xs tracking-widest uppercase">
-            <a href="#arenas" className="hover:text-zinc-400 transition">Arenas</a>
-            
             {user ? (
               <div className="flex items-center space-x-4">
                 {isAdmin && (

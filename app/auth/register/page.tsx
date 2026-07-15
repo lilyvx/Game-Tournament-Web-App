@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { signup } from '../action'
+import { signup } from '../actions'
 
 export default function RegisterPage() {
   const router = useRouter()
