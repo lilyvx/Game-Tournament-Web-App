@@ -33,7 +33,6 @@ export default async function TournamentHubPage() {
 
   return (
     <main className="min-h-screen bg-black text-white px-6 py-12 relative overflow-hidden">
-      {/* Visual Accent Glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#4a0006]/10 blur-[120px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto space-y-12 relative z-10">

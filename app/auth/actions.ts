@@ -59,7 +59,7 @@ export async function logout() {
 
 
 
-
+//CREATE TOURNAMENT
 export async function createTournament(formData: FormData): Promise<void> {
   const supabase = await createServerSideClient()
 
@@ -88,9 +88,39 @@ export async function createTournament(formData: FormData): Promise<void> {
   }
 
   // Clear cache and refresh the current route view
-  revalidatePath('/tournament')
-  revalidatePath('/')
+  revalidatePath('/arena') 
+  // Send the admin back to the dedicated display dashboard
+  redirect('/arena')
   
   // Explicitly return nothing to satisfy Promise<void>
+  return
+}
+
+
+//DELETE TOURNAMENT
+export async function deleteTournament(formData: FormData): Promise<void> {
+  const supabase = await createServerSideClient()
+
+  
+  const { data: { user } } = await supabase.auth.getUser()
+  const isAdmin = user?.email === 'admin@example.com' 
+  
+  if (!user || !isAdmin) {
+    throw new Error('Unauthorized: Only administrators can delete tournament arenas.')
+  }
+
+  const id = formData.get('id') as string
+
+  const { error } = await supabase
+    .from('tournament')
+    .delete()
+    .eq('id', id)
+
+  if (error) {
+    console.error(`Failed to delete tournament: ${error.message}`)
+    return
+  }
+
+  revalidatePath('/')
   return
 }
