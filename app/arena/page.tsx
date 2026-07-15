@@ -1,6 +1,6 @@
 import { createServerSideClient } from '@/lib/supabase-server'
 import Link from 'next/link'
-import { logout, createTournament } from '../auth/actions' 
+import { logout, createTournament, deleteTournament } from '../auth/actions' 
 
 export const dynamic = 'force-dynamic'
 
@@ -21,6 +21,9 @@ export default async function ArenaPage() {
   
   // If the user object exists, they are logged in and allowed to create tournaments!
   const canCreateTournament = user !== null
+  
+  // Check if the logged-in user is an admin for the delete privilege
+  const isAdmin = user !== null && user?.app_metadata?.role === 'admin'
 
   // Fetch the tournament list specifically for the Arena page
   const { data: tournaments, error } = await supabase
@@ -161,9 +164,31 @@ export default async function ArenaPage() {
             tournaments.map((tournament: Tournament) => (
               <div 
                 key={tournament.id}
-                className="p-6 rounded-2xl bg-gradient-to-b from-zinc-900/40 to-black/60 border border-white/5 backdrop-blur-md flex flex-col justify-between min-h-[220px] transition-all duration-300 hover:border-[#4a0006]/40"
+                className="p-6 rounded-2xl bg-gradient-to-b from-zinc-900/40 to-black/60 border border-white/5 backdrop-blur-md flex flex-col justify-between min-h-[220px] transition-all duration-300 hover:border-[#4a0006]/40 relative group/card"
               >
-                <div className="space-y-2">
+                {/* Admin Delete Action */}
+                {isAdmin && (
+                  <form 
+                    action ={deleteTournament} 
+                    className="absolute top-4 right-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200"
+                  >
+                    <input type="hidden" name="id" value={tournament.id} />
+                    <button 
+                      type="submit" 
+                      title="Delete Arena"
+                      className="p-2 rounded-lg bg-zinc-900 hover:bg-red-950 border border-white/10 hover:border-red-800 text-zinc-400 hover:text-red-400 transition"
+                      onClick={(e) => {
+                        if (!confirm('Are you absolutely sure you want to completely delete this tournament? This cannot be undone.')) {
+                          e.preventDefault()
+                        }
+                      }}
+                    >
+                      🗑️
+                    </button>
+                  </form>
+                )}
+
+                <div className="space-y-2 pr-8">
                   <div className="flex justify-between items-center text-[10px] tracking-widest uppercase">
                     <span className="px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">
                       {tournament.game}
