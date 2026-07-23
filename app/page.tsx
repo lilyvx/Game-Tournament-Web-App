@@ -83,19 +83,66 @@ export default async function HomePage() {
             >
               Enter The Arena
             </Link>
-            <Link 
-              href="/about" 
+            <a 
+              href="#footer" 
               className="px-8 py-3.5 rounded-full font-semibold text-xs uppercase tracking-widest text-zinc-400 border border-zinc-800 hover:border-zinc-700 hover:text-white transition"
             >
               Learn More
-            </Link>
+            </a>
           </div>
         </div>
 
-        {/* Temp footer */}
-        <div className="text-center text-[10px] tracking-[0.3em] text-zinc-600 uppercase pt-6 border-t border-white/5">
-          © {new Date().getFullYear()} VictorsOnly. All rights reserved.
-        </div>
+        {/* Footer */}
+        <footer id="footer" className="pt-16 pb-6 border-t border-white/5 scroll-mt-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 pb-12">
+
+            <div className="space-y-4">
+              <h3 className="text-xs uppercase tracking-widest font-medium" style={{ color: '#75040d' }}>
+                Tournaments
+              </h3>
+              <ul className="space-y-2 text-sm text-zinc-400">
+                <li><Link href="/arena" className="hover:text-white transition">Browse Arenas</Link></li>
+                <li><Link href="/arena#deploy-panel" className="hover:text-white transition">Host a Tournament</Link></li>
+                <li><Link href="/auth/login" className="hover:text-white transition">Login</Link></li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-xs uppercase tracking-widest font-medium" style={{ color: '#75040d' }}>
+                Company
+              </h3>
+              <ul className="space-y-2 text-sm text-zinc-400">
+                <li><Link href="/news" className="hover:text-white transition">News</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition">Contact Us</Link></li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-xs uppercase tracking-widest font-medium" style={{ color: '#75040d' }}>
+                Resources
+              </h3>
+              <ul className="space-y-2 text-sm text-zinc-400">
+                <li><a href="tel:+60321671234" className="hover:text-white transition">Hotline</a></li>
+                <li><a href="mailto:contact@victorsonly.com" className="hover:text-white transition">Email Support</a></li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-xs uppercase tracking-widest font-medium" style={{ color: '#75040d' }}>
+                Follow Us
+              </h3>
+              <ul className="space-y-2 text-sm text-zinc-400">
+                <li><a href="https://facebook.com/victorsonly" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Facebook</a></li>
+                <li><a href="https://instagram.com/victorsonly" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Instagram</a></li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div className="text-center text-[10px] tracking-[0.3em] text-zinc-600 uppercase pt-6 border-t border-white/5">
+            © {new Date().getFullYear()} VictorsOnly. All rights reserved.
+          </div>
+        </footer>
 
       </div>
     </main>
