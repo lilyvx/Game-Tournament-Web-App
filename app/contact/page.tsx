@@ -30,9 +30,9 @@ export default async function ContactPage() {
             <Link href="/" className="hover:text-white border-b border-transparent hover:border-[#4a0006] pb-1 transition-all duration-200">
               Home
             </Link>
-            <a href="/#arenas" className="hover:text-white border-b border-transparent hover:border-[#4a0006] pb-1 transition-all duration-200">
+            <Link href="/arena" className="hover:text-white border-b border-transparent hover:border-[#4a0006] pb-1 transition-all duration-200">
               Arena
-            </a>
+            </Link>
             <Link href="/news" className="hover:text-white border-b border-transparent hover:border-[#4a0006] pb-1 transition-all duration-200">
               News
             </Link>
@@ -76,20 +76,20 @@ export default async function ContactPage() {
 
           <div className="mt-8 space-y-4 text-center">
             <h2 className="text-sm tracking-widest uppercase font-light text-zinc-300">
-              Hotline: <a href="tel:+60321671234" className="text-white hover:text-[#4a0006] transition">+603 2167 1234</a>
+              Hotline: <a href="tel:+60321671234" className="text-white hover:text-[#75040d] transition">+603 2167 1234</a>
             </h2>
 
-            <h2 className="text-sm tracking-widest uppercase font-light text-zinc-300">
-              Email: <a href="mailto:contact@victorsonly.com" className="text-white hover:text-[#4a0006] transition">contact@victorsonly.com</a>
-            </h2>
+            <p className="text-sm tracking-widest uppercase font-light text-zinc-300">
+              Email: <a href="mailto:contact@victorsonly.com" className="text-white hover:text-[#75040d] transition">contact@victorsonly.com</a>
+            </p>
 
             <div className="text-sm tracking-widest uppercase font-light text-zinc-300 space-y-2">
               <p>Follow us on Social Media</p>
               <div className="flex justify-center gap-6">
-                <a href="https://facebook.com/victorsonly" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#4a0006] transition">
+                <a href="https://facebook.com/victorsonly" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#75040d] transition">
                   Facebook
                 </a>
-                <a href="https://instagram.com/victorsonly" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#4a0006] transition">
+                <a href="https://instagram.com/victorsonly" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#75040d] transition">
                   Instagram
                 </a>
               </div>
