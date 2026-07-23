@@ -213,7 +213,13 @@ export default async function ArenaPage() {
                     </p>
                   </div>
                   <button className="px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-colors" style={{ backgroundColor: '#4a0006' }}>
-                    View Arena
+                    <Link 
+                      href={`/arena/${tournament.id}`}
+                      className="px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-colors inline-block" 
+                      style={{ backgroundColor: '#4a0006' }}
+                    >
+                      View Arena
+                    </Link>
                   </button>
                 </div>
               </div>
